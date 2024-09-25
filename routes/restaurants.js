@@ -1,22 +1,22 @@
 const express = require('express')
 const router = express.Router()
-const Restaurant = require("../models/index")
+const {Restaurant, Menu} = require("../models/index")
 const {check, validationResult} = require('express-validator')
 
 
 router.get('/', async (req,res)=>{
-    const restaurants = await Restaurant.findAll();
+    const restaurants = await Restaurant.findAll({ include: { all: true, nested: true } });
     res.json(restaurants)
 })
 
 router.get('/:id', async(req,res)=>{
     const id = req.params.id;
-    const restaurant = await Restaurant.findByPk(id)
+    const restaurant = await Restaurant.findByPk(id,{ include: { all: true, nested: true} })
     res.json(restaurant)
 })
 
 
-router.post("/", [check('name').not().isEmpty().trim(), check('location').not().isEmpty().trim(), check('cuisine').not().isEmpty().trim()],async (req,res)=>{
+router.post("/", [check(['name','location','cuisine']).not().isEmpty().trim(), check('name').isLength({min:10, max:30})],async (req,res)=>{
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         res.json({error: errors.array()})

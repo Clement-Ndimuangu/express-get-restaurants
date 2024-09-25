@@ -76,9 +76,23 @@ describe('Restaurant endpoint test', ()=>{
           }))
     })
 
-    test('Test that POST /restaurants request returns error array when updated with field missing. ', async()=>{
+    test('Test that POST /restaurants request returns error array when updated with location missing. ', async()=>{
       const response = await request(app).post('/restaurants').send({
           name: 'AppleBees',
+          cuisine: 'FastFood'
+        })
+      expect(response.body.error[0].msg).toEqual('Invalid value')
+  })
+    test('Test that POST /restaurants request returns error array when updated with cuisine missing. ', async()=>{
+      const response = await request(app).post('/restaurants').send({
+          name: 'AppleBees',
+          location: 'Chicago'
+        })
+      expect(response.body.error[0].msg).toEqual('Invalid value')
+  })
+    test('Test that POST /restaurants request returns error array when updated with name missing. ', async()=>{
+      const response = await request(app).post('/restaurants').send({
+          location: 'Chicago',
           cuisine: 'FastFood'
         })
       expect(response.body.error[0].msg).toEqual('Invalid value')

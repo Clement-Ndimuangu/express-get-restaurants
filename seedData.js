@@ -2,7 +2,7 @@ const seedRestaurant = [
     {
       name: 'AppleBees',
       location: 'Texas',
-      cuisine: 'FastFood'
+      cuisine: 'FastFood',
     },
     {
       name: 'LittleSheep',
@@ -18,13 +18,16 @@ const seedRestaurant = [
 
 const seedMenu = [
   {
-    title: 'Breakfast'
+    title: 'Breakfast',
+    restaurantId:2
   },
   {
-    title: 'Lunch'
+    title: 'Lunch',
+    restaurantId:1
   },
   {
-    title: 'Dinner'
+    title: 'Dinner',
+    restaurantId:2
   },
 ]
 
@@ -33,19 +36,29 @@ const seedItem = [
     name: 'bhindi masala',
     image: 'someimage.jpg',
     price: 9.50,
-    vegetarian: true
+    vegetarian: true,
+    menuId:1
   },
   {
     name: 'egusi soup',
     image: 'someimage.jpg',
     price: 10.50,
-    vegetarian: false
+    vegetarian: false,
+    menuId:2
   },
   {
     name: 'hamburger',
     image: 'someimage.jpg',
     price: 6.50,
-    vegetarian: false
+    vegetarian: false,
+    menuId:1
+  },
+  {
+    name: 'hamburger',
+    image: 'someimage.jpg',
+    price: 6.50,
+    vegetarian: false,
+    menuId:3
   }
 ]
 
